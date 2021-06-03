@@ -9,8 +9,8 @@ struct Node{
 Node* head; // The first element of the linked list
 
 // TODO need to rename the function to be more clear that it adds the element at the beginning
-void insert(int x); // Function to insert an element to the linked list
-
+void insert(int data); // Function to insert an element to the linked list
+void insert(int data,int index);
 void print(); // Function to print all the elements of the linked list
 
 int main() {
@@ -18,7 +18,7 @@ int main() {
     std::cout << "Hello Github!\n";
     head = NULL;
 
-    std::cout << "how many numbers \n"; //Input for how many elements we want to add to the list
+    std::cout << "How many numbers \n"; //Input for how many elements we want to add to the list
     std::cin >> n;
 
     for(int i =0; i <n; i++){
@@ -31,17 +31,35 @@ int main() {
     return 0;
 }
 
-void insert(int x){
+void insert(int data){
     Node* temp = new Node; //Make a new temp node
-    temp -> data =x; // Set the data in node to our value
+    temp -> data = data; // Set the data in node to our value
     temp -> next = head; // Set the value of pointer to next node as the previous value of first node
     head = temp; // Then make temp the first Node
+}
+
+void insert(int data,int index){
+    Node* temp1 = new Node;
+    temp1->data = data;
+    temp1->next = NULL;
+    if(index==1){
+        temp1-> next = head; // Set the value of pointer to next node as the previous value of first node
+        head = temp1; // Then make temp the first Node
+        return;
+    }
+    Node* temp2 = head;
+    for(int i = 0; i < index-2; i++){
+      temp2 = temp2 -> next;
+    }
+    temp1->next = temp2->next;
+    temp2->next = temp1;
 }
 
 void print(){
     Node* temp = head; // Make a new node pointer that points to the first element in the list
     std::cout << "List is: ";
-    while(temp !=NULL){ // go through the list untill no more next elements to go to are left
+    // go through the list untill no more next elements to go to are left
+    while(temp !=NULL){
         std::cout << temp -> data << " ";
         temp = temp -> next;
     }
