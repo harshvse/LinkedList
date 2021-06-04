@@ -27,7 +27,10 @@ int main() {
         insert(x); // Take n inputs from stdin and insert at the beginning of the list using insert()function
         print(); // simple function to print the list
     }
-
+    insert(10,1);
+    print();
+    insert(11,4);
+    print();
     return 0;
 }
 
@@ -42,13 +45,13 @@ void insert(int data,int index){
     Node* temp1 = new Node;
     temp1->data = data;
     temp1->next = NULL;
-    if(index==1){
+    if(index==0){
         temp1-> next = head; // Set the value of pointer to next node as the previous value of first node
         head = temp1; // Then make temp the first Node
         return;
     }
     Node* temp2 = head;
-    for(int i = 0; i < index-2; i++){
+    for(int i = 0; i < index-1; i++){
       temp2 = temp2 -> next;
     }
     temp1->next = temp2->next;
