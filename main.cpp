@@ -12,7 +12,7 @@ Node* head; // The first element of the linked list
 void insert(int data); // Function to insert an element to the linked list
 void insert(int data,int index);
 void print(); // Function to print all the elements of the linked list
-
+void deleteAt(int index);
 int main() {
     int n,x;
     std::cout << "Hello Github!\n";
@@ -30,6 +30,10 @@ int main() {
     insert(10,1);
     print();
     insert(11,4);
+    print();
+    deleteAt(0);
+    print();
+    deleteAt(3);
     print();
     return 0;
 }
@@ -56,6 +60,24 @@ void insert(int data,int index){
     }
     temp1->next = temp2->next;
     temp2->next = temp1;
+}
+
+void deleteAt(int index){
+    Node* temp;
+    if(index == 0){
+        temp = head;
+        head = temp->next;
+        delete temp;
+        return;
+    }
+    Node* currentNode = head;
+    for(int i =0; i < index-1; i++ ){
+        currentNode = currentNode->next;
+    }
+    temp = currentNode->next;
+    currentNode->next = temp->next;
+    delete temp;
+
 }
 
 void print(){
