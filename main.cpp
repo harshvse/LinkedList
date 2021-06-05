@@ -13,6 +13,8 @@ void insert(int data); // Function to insert an element to the linked list
 void insert(int data,int index);
 void print(); // Function to print all the elements of the linked list
 void deleteAt(int index);
+void reverseList();
+
 int main() {
     int n,x;
     std::cout << "Hello Github!\n";
@@ -27,13 +29,8 @@ int main() {
         insert(x); // Take n inputs from stdin and insert at the beginning of the list using insert()function
         print(); // simple function to print the list
     }
-    insert(10,1);
-    print();
-    insert(11,4);
-    print();
-    deleteAt(0);
-    print();
-    deleteAt(3);
+
+    reverseList();
     print();
     return 0;
 }
@@ -60,6 +57,20 @@ void insert(int data,int index){
     }
     temp1->next = temp2->next;
     temp2->next = temp1;
+}
+
+void reverseList(){
+    Node *currentNode, *previous, *next;
+    currentNode = head;
+    previous = NULL;
+
+    while(currentNode != NULL){
+        next = currentNode->next;
+        currentNode->next = previous;
+        previous = currentNode;
+        currentNode = next;
+    }
+    head = previous;
 }
 
 void deleteAt(int index){
