@@ -8,12 +8,13 @@ struct Node{
 
 Node* head; // The first element of the linked list
 
-// TODO need to rename the function to be more clear that it adds the element at the beginning
 void insert(int data); // Function to insert an element to the linked list
 void insert(int data,int index);
 void print(); // Function to print all the elements of the linked list
+void recursivePrint(Node* nodeToPrint);
 void deleteAt(int index);
 void reverseList();
+void recursiveReverse(Node* nodeToReverse);
 
 int main() {
     int n,x;
@@ -27,15 +28,16 @@ int main() {
         std::cout << "Enter the numbers\n";
         std::cin >> x;
         insert(x); // Take n inputs from stdin and insert at the beginning of the list using insert()function
-        print(); // simple function to print the list
     }
-
-    reverseList();
-    print();
+    insert(26,2);
+    recursivePrint(head);
+    recursiveReverse(head);
     return 0;
 }
 
 void insert(int data){
+    // If no index is provided then by default we place the new node in the front of the linked list
+
     Node* temp = new Node; //Make a new temp node
     temp -> data = data; // Set the data in node to our value
     temp -> next = head; // Set the value of pointer to next node as the previous value of first node
@@ -51,8 +53,8 @@ void insert(int data,int index){
         head = temp1; // Then make temp the first Node
         return;
     }
-    Node* temp2 = head;
-    for(int i = 0; i < index-1; i++){
+    Node* temp2 = head; // Sets the temporary node as the first node in order to go through the list
+    for(int i = 0; i < index-1; i++){ // reach the node right before the index we want to insert the new node on
       temp2 = temp2 -> next;
     }
     temp1->next = temp2->next;
@@ -101,4 +103,22 @@ void print(){
     }
     std::cout << "\n";
 
+}
+
+void recursivePrint(Node* nodeToPrint){
+    if(nodeToPrint == NULL) {
+        std::cout << std::endl;
+        return;
+    }
+    std::cout << nodeToPrint->data << " ";
+    recursivePrint(nodeToPrint->next);
+}
+
+void recursiveReverse(Node* nodeToReverse){
+    if(nodeToReverse == NULL) {
+        std::cout << std::endl;
+        return;
+    }
+    recursiveReverse(nodeToReverse->next);
+    std::cout << nodeToReverse->data << " ";
 }
