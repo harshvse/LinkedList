@@ -12,29 +12,30 @@ void insert(int data); // Function to insert an element to the linked list
 void insert(int data,int index);
 void print(); // Function to print all the elements of the linked list
 void recursivePrint(Node* nodeToPrint);
+void recursiveReversePrint(Node* nodeToReversePrint);
 void deleteAt(int index);
 void reverseList();
 void recursiveReverse(Node* nodeToReverse);
 
 int main() {
-    int n,x;
+    int n, x;
     std::cout << "Hello Github!\n";
     head = NULL;
 
     std::cout << "How many numbers \n"; //Input for how many elements we want to add to the list
     std::cin >> n;
 
-    for(int i =0; i <n; i++){
+    for (int i = 0; i < n; i++) {
         std::cout << "Enter the numbers\n";
         std::cin >> x;
         insert(x); // Take n inputs from stdin and insert at the beginning of the list using insert()function
     }
-    insert(26,2);
     recursivePrint(head);
     recursiveReverse(head);
+    recursivePrint(head);
+    print();
     return 0;
 }
-
 void insert(int data){
     // If no index is provided then by default we place the new node in the front of the linked list
 
@@ -114,11 +115,22 @@ void recursivePrint(Node* nodeToPrint){
     recursivePrint(nodeToPrint->next);
 }
 
-void recursiveReverse(Node* nodeToReverse){
-    if(nodeToReverse == NULL) {
+void recursiveReversePrint(Node* nodeToReversePrint){
+    if(nodeToReversePrint == NULL) {
         std::cout << std::endl;
         return;
     }
+    recursiveReversePrint(nodeToReversePrint->next);
+    std::cout << nodeToReversePrint->data << " ";
+}
+
+void recursiveReverse(Node* nodeToReverse){
+    if(nodeToReverse->next == NULL){
+        head = nodeToReverse;
+        return;
+    }
     recursiveReverse(nodeToReverse->next);
-    std::cout << nodeToReverse->data << " ";
+    Node *temp = nodeToReverse->next;
+    temp->next = nodeToReverse;
+    nodeToReverse->next = NULL;
 }
